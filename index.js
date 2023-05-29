@@ -1,10 +1,7 @@
-const express = require('express')
-const app = express()
+const Server = require("./models/server");
 
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
+require("dotenv").config();
 
-app.listen(8080,()=>{
-  console.log("Servidor inicializado")
-})
+const server = new Server();
+
+server.listen();
