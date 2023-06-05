@@ -12,9 +12,9 @@ const usuariosPost = async (req, res) => {
   
  
 
-  const {nombre,email,password,role} =req.body
+  const {nombre,email,tel,direccion,password,role} =req.body
 
-    const usuario = new Usuario({nombre,email,password,role});
+    const usuario = new Usuario({nombre,tel,direccion,email,password,role});
 
      
 
@@ -23,7 +23,7 @@ const usuariosPost = async (req, res) => {
 
     await usuario.save();
   res.status(201).json({
-    msg:"Usuario creado con exito",
+    msg:"Socio creado con exito",
    usuario
   });
 };
