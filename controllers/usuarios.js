@@ -2,9 +2,14 @@ const bcrypt = require('bcryptjs');
 
 const Usuario = require ("../models/usuario")
 
-const usuariosGet = (req, res) => {
+const usuariosGet = async (req, res) => {
+
+  const usuarios = await Usuario.find({estado:true});
+  const total = await Usuario.countDocuments({estado:true})
   res.json({
-    msg: "peticion get -rutas",
+    total,
+    usuarios,
+    
   });
 };
 
@@ -12,9 +17,9 @@ const usuariosPost = async (req, res) => {
   
  
 
-  const {nombre,email,tel,direccion,password,role} =req.body
+  const {nombre,email,password,role} =req.body
 
-    const usuario = new Usuario({nombre,tel,direccion,email,password,role});
+    const usuario = new Usuario({nombre,email,password,role});
 
      
 

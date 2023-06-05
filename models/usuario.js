@@ -7,16 +7,6 @@ const UsuarioSchema = Schema({
 
     },
    
-    direccion:{
-        type:String,
-        
-
-    },
-    tel:{
-        type:String,
-        
-
-    },
     email:{
         type:String,
         required:[true,"El email es obligatorio"],
@@ -28,8 +18,8 @@ const UsuarioSchema = Schema({
     },
     role:{
         type:String,
-        enum:["ADMIN_ROLE", "SOCIO_ROLE"],
-        default:"SOCIO_ROLE"
+        enum:"ADMIN_ROLE",
+        default:"ADMIN_ROLE"
     },
     img:{
         type:String,
