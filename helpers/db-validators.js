@@ -12,9 +12,17 @@ const Usuario = require ("../models/usuario")
   if(existeEmail){
     throw new Error(`El email ${email} ya existe en la BD`)
     
-  }
+  }}
+
+  const existeUsuarioporId = async(id)=>{
+    const existeUsuario = await Usuario.findOne({_id: id})
+    if(!existeUsuario){
+      throw new Error(`El id ${id} no existe en la BD`)
+      
+    }
 }
   module.exports = {
     esRoleValido,
-    emailExiste
+    emailExiste,
+    existeUsuarioporId
   }
