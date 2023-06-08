@@ -6,6 +6,7 @@ const {noticiaExiste} = require("../helpers/db-validators")
 const validarJWT = require("../middlewares/validar-jwt");
 const { esAdminRole } = require("../middlewares/validar-role");
 const { validarCampos } = require("../middlewares/validar-campos");
+const { obtenerNoticias } = require("../controllers/noticia");
 
 // const {obtenerNoticias,actualizarNoticia,borrarNoticia,obtenerNoticia,crearNoticia} = require("../controllers/noticia")
 
