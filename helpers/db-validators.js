@@ -1,3 +1,4 @@
+const Noticia = require("../models/noticia")
 const  Role  = require ("../models/role")
 const Usuario = require ("../models/usuario")
 
@@ -21,8 +22,17 @@ const Usuario = require ("../models/usuario")
       
     }
 }
+
+const noticiaExiste = async(id)=>{
+  const existeNoticia = await Noticia.findById(id)
+  if(!existeNoticia){
+    throw new Error(`La noticia con el ${id} no existe en la BD`)
+    
+  }
+}
   module.exports = {
     esRoleValido,
     emailExiste,
-    existeUsuarioporId
+    existeUsuarioporId,
+    noticiaExiste
   }

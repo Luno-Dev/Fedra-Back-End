@@ -6,7 +6,6 @@ const {
   usuariosPut,
   usuariosDelete,
 } = require("../controllers/usuarios");
-const router = Router();
 const { check } = require("express-validator");
 const {
   esRoleValido,
@@ -15,6 +14,7 @@ const {
 } = require("../helpers/db-validators");
 const validarJWT = require("../middlewares/validar-jwt");
 const { esAdminRole } = require("../middlewares/validar-role");
+const router = Router();
 
 router.get("/",[
   validarJWT,
