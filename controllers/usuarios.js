@@ -52,6 +52,7 @@ const usuariosPut = async (req, res) => {
 
 const usuariosDelete= async (req, res)=> {
   const { id } = req.params;
+
   const usuarioBorrado = await Usuario.findByIdAndUpdate(id,{estado:false},{new:true})
     res.json({
       msg: "Usuario dado de baja  correctamente",
