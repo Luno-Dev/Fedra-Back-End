@@ -26,7 +26,6 @@ router.post("/",[
     check("titulo", "El titulo es obligatorio").notEmpty(),
     check("descripcion", "La descricion es obligatoria").notEmpty(),
     check("img", "La imagen es obligatoria").notEmpty(),
-    check("fecha", "La fecha es obligatoria").notEmpty(),
     check("autor", "El autor es obligatorio").notEmpty(),
     validarCampos,
 

@@ -28,7 +28,7 @@ const obtenerNoticia = async (req, res) => {
 // ----------------------------------------------------------------
 // Crear producto nuevo
 const crearNoticia = async (req, res) => {
-  const { descripcion, autor, fecha, img } = req.body;
+  const { descripcion, autor,  img } = req.body;
   const titulo = req.body.titulo.toUpperCase();
   const noticiaDb = await Noticia.findOne({ titulo });
   if (noticiaDb) {
@@ -41,7 +41,7 @@ const crearNoticia = async (req, res) => {
     titulo,
     descripcion,
     autor,
-    fecha,
+    
     img,
   };
   const noticia = new Noticia(data)
@@ -58,11 +58,11 @@ const crearNoticia = async (req, res) => {
 
     const actualizarNoticia = async (req, res) => {
         const {id} = req.params;
-        const { descripcion, autor, fecha, img } = req.body;
+        const { descripcion, autor,  img } = req.body;
 
 
         let data ={
-            descripcion, autor, fecha, img
+            descripcion, autor,  img
         }
         if(req.body.titulo){
             data.titulo =  req.body.titulo.toUpperCase();

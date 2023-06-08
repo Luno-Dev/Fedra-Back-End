@@ -13,9 +13,9 @@ const NoticiaSchema = Schema({
         type: String,
         required: [true, "El autor es obligatorio"],
       },
-      fecha:{
-        type: String,
-        required: [true, "El autor es obligatorio"],
+      fecha: {
+        type: Date,
+        default: Date.now(),
       },
       img: {
         type: String,
