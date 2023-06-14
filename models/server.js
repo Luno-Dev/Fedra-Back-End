@@ -8,6 +8,7 @@ class Server {
     this.usuariosPath = "/api/usuarios"
     this.authPath = "/api/auth"
     this.noticiasPath = "/api/noticias"
+    this.sociosPath = "/api/socios"
     this.conectarDb();
 
     this.middleware()
@@ -31,6 +32,7 @@ class Server {
     this.app.use(this.usuariosPath,require("../routes/usuarios"))
     this.app.use(this.authPath,require("../routes/auth"))
     this.app.use(this.noticiasPath,require("../routes/noticia"))
+    this.app.use(this.sociosPath,require("../routes/socio"))
 
   }
   listen() {
