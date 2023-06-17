@@ -47,11 +47,39 @@ const emailExisteSocio = async(email)=>{
       
     }
 }
+//documentodetrabajador existe
+const  doctrabajadorExisteSocio = async(trabajadordocumento)=>{
+  const existeEmailSocio = await Socio.findOne({trabajadordocumento})
+  if(existeEmailSocio){
+    throw new Error(`El documento de trabajador ${trabajadordocumento} ya existe en la BD`)
+    
+  }}
+
+  //cuildetrabajador existe
+const  cuiltrabajadorExisteSocio = async(trabajadorcuil)=>{
+  const existeEmailSocio = await Socio.findOne({trabajadorcuil})
+  if(existeEmailSocio){
+    throw new Error(`El cuil de trabajador ${trabajadorcuil} ya existe en la BD`)
+    
+  }}
+
+    //cuildeempleador existe
+const  cuilempleadorExisteSocio = async(empleadorcuil)=>{
+  const existeEmailSocio = await Socio.findOne({empleadorcuil})
+  if(existeEmailSocio){
+    throw new Error(`El cuil de empleador ${empleadorcuil} ya existe en la BD`)
+    
+  }}
+
+ 
   module.exports = {
     esRoleValido,
     emailExiste,
     existeUsuarioporId,
     noticiaExiste,
     emailExisteSocio,
-    existeSocioporId
+    existeSocioporId,
+    doctrabajadorExisteSocio,
+    cuiltrabajadorExisteSocio,
+    cuilempleadorExisteSocio
   }

@@ -4,13 +4,23 @@ const { check } = require("express-validator");
 const {
     emailExisteSocio,
     existeSocioporId,
-    esRoleValido
+    esRoleValido,
+    doctrabajadorExisteSocio,
+    cuiltrabajadorExisteSocio,
+    cuilempleadorExisteSocio
   } = require("../helpers/db-validators");
-const { sociosGet, sociosPost, sociosPut, sociosDelete } = require("../controllers/socio")
+const { sociosGet, sociosPost, sociosPut, sociosDelete } = require("../controllers/socio");
+
+const { esSocioRole, esAdminRole } = require("../middlewares/validar-role");
+const validarJWT = require("../middlewares/validar-jwt");
 
 const router = Router()
 
-router.get("/", sociosGet )
+router.get("/", [
+  validarJWT,
+  esAdminRole,
+  validarCampos
+],sociosGet )
 
 router.post("/", [
     check("password", "La contraseña debe tener minimo 6 caracteres").isLength({
@@ -18,6 +28,9 @@ router.post("/", [
     }),
     check("email", "El correo no es valido").isEmail(),
     check("email").custom(emailExisteSocio),
+    check("trabajadordocumento").custom(doctrabajadorExisteSocio),
+    check("trabajadorcuil").custom(cuiltrabajadorExisteSocio),
+    check("empleadorcuil").custom(cuilempleadorExisteSocio),
     check("role").custom(esRoleValido),
     validarCampos
 ], sociosPost )
@@ -31,6 +44,8 @@ router.put("/:id",[
 ],sociosPut )
 
 router.delete("/:id", [
+  validarJWT,
+  esAdminRole,
   check("id", "No es un id de mongo valido").isMongoId(),
   check("id").custom(existeSocioporId),
 
