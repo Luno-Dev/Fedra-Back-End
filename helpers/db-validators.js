@@ -1,5 +1,6 @@
 const Noticia = require("../models/noticia")
 const  Role  = require ("../models/role")
+const Socio = require("../models/socio")
 const Usuario = require ("../models/usuario")
 
   const esRoleValido = async(role="")=>{
@@ -30,9 +31,27 @@ const noticiaExiste = async(id)=>{
     
   }
 }
+
+//email de socios existe
+const emailExisteSocio = async(email)=>{
+  const existeEmailSocio = await Socio.findOne({email})
+  if(existeEmailSocio){
+    throw new Error(`El email ${email} ya existe en la BD`)
+    
+  }}
+
+  const existeSocioporId = async(id)=>{
+    const existeSocio = await Socio.findOne({_id: id})
+    if(!existeSocio){
+      throw new Error(`El id ${id} no existe en la BD`)
+      
+    }
+}
   module.exports = {
     esRoleValido,
     emailExiste,
     existeUsuarioporId,
-    noticiaExiste
+    noticiaExiste,
+    emailExisteSocio,
+    existeSocioporId
   }

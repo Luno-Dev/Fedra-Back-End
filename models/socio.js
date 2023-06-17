@@ -137,8 +137,7 @@ const SocioSchema = Schema({
     required: [true, "El password es obligatorio"],
   },
   role: {
-    type: String,
-    enum: ["ADMIN_ROLE","SOCIO_ROLE"],
+    type: String, 
     default: "SOCIO_ROLE",
   },
   img: {
@@ -150,10 +149,10 @@ const SocioSchema = Schema({
   },
 });
 
-UsuarioSchema.methods.toJSON = function () {
+SocioSchema.methods.toJSON = function () {
   const { __v, password,  _id, ...socio } = this.toObject();
   socio.socioid = _id;
   return socio;
 };
 
-module.exports = model("Usuario", UsuarioSchema);
+module.exports = model("Socio", SocioSchema);
