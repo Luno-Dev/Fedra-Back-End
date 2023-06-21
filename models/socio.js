@@ -53,12 +53,12 @@ const SocioSchema = Schema({
   },
   trabajadorpiso: {
     type: String,
-    required: [true, "El piso de domicilio del trabajador es obligatorio"],
+    
   },
 
   trabajadordepto: {
     type: String,
-    required: [true, "El Numero de departamento del trabajador es obligatorio"],
+    
   },
   trabajadorlocalidad: {
     type: String,
