@@ -116,9 +116,20 @@ const sociosDelete = async(req, res) => {
  
 };
 
+const obtenerSocio= async (req, res) => {
+  const { id } = req.params;
+
+  const socio = await Socio.findById(id);
+
+  res.json({
+    socio,
+  });
+};
+
 module.exports = {
   sociosGet,
   sociosPost,
   sociosPut,
   sociosDelete,
+  obtenerSocio,
 };
