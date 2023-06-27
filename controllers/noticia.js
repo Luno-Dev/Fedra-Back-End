@@ -77,7 +77,7 @@ const crearNoticia = async (req, res) => {
     }
     const borrarNoticia = async (req,res)=>{
         const {id} = req.params;
-        const noticiaBorrada = await Noticia.findbyIdAndDelete(id);
+        const noticiaBorrada = await Noticia.findByIdAndDelete(id);
         res.json({
             msg:"Noticia borrada correctamente",
             noticiaBorrada
