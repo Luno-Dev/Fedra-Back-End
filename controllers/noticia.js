@@ -2,7 +2,7 @@ const Noticia = require("../models/noticia");
 
 // get para traer todos los productos paginados
 const obtenerNoticias = async (req, res) => {
-  const { limite = 5, desde = 0 } = req.query;
+  const { limite = 0, desde = 0 } = req.query;
   const query = { estado: true };
 
   const [total, noticias] = await Promise.all([
@@ -77,7 +77,7 @@ const crearNoticia = async (req, res) => {
     }
     const borrarNoticia = async (req,res)=>{
         const {id} = req.params;
-        const noticiaBorrada = await Noticia.findByIdAndUpdate(id,{estado:false},{new:true})
+        const noticiaBorrada = await Noticia.findByIdAndDelete(id);
         res.json({
             msg:"Noticia borrada correctamente",
             noticiaBorrada
