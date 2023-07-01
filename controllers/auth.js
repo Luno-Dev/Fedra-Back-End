@@ -1,6 +1,7 @@
 const Usuario = require ("../models/usuario")
 const bcrypt = require("bcryptjs")
 const {generarJWT} = require("../helpers/generar-jwt")
+const { default: Cookies } = require("universal-cookie")
 
 const loginAdmin = async (req,res)=>{
     const {email,password} = req.body
@@ -28,10 +29,14 @@ if(!validaPassword){
 }
        // generar un token
        const token = await generarJWT(usuario.id)
+    const cookie = new Cookies();
+    
+    const data= cookie("token", token, {expires:4})
  
     res.json({
         usuario,
-        token
+        token,
+        data
     })
 }
     catch (error) {
