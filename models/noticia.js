@@ -17,9 +17,13 @@ const NoticiaSchema = Schema({
         type: Date,
         default: Date.now(),
       },
-      img: {
-        type: String,
-      },
+      img: [{
+        url:{
+          type: String,
+        }
+         ,
+      }
+      ],
       estado: {
         type: Boolean,
         default: true,
