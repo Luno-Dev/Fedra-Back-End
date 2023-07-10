@@ -2,6 +2,7 @@ const Usuario = require ("../models/usuario")
 const bcrypt = require("bcryptjs")
 const {generarJWT} = require("../helpers/generar-jwt")
 
+
 const loginAdmin = async (req,res)=>{
     const {email,password} = req.body
 try {
@@ -31,7 +32,8 @@ if(!validaPassword){
  
     res.json({
         usuario,
-        token
+        token,
+        
     })
 }
     catch (error) {
