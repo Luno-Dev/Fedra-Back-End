@@ -7,6 +7,7 @@ class Server {
     this.port = process.env.PORT;
     this.usuariosPath = "/api/usuarios"
     this.authPath = "/api/auth"
+    this.categoriasPath ="/api/categorias"
     this.socioauthPath = "/api/sauth"
     this.noticiasPath = "/api/noticias"
     this.sociosPath = "/api/socios"
@@ -32,6 +33,7 @@ class Server {
 
     this.app.use(this.usuariosPath,require("../routes/usuarios"))
     this.app.use(this.authPath,require("../routes/auth"))
+    this.app.use(this.categoriasPath, require("../routes/categorias"))
     this.app.use(this.noticiasPath,require("../routes/noticia"))
     this.app.use(this.sociosPath,require("../routes/socio"))
     this.app.use(this.socioauthPath,require("../routes/socioauth"))

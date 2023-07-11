@@ -2,6 +2,7 @@ const Noticia = require("../models/noticia")
 const  Role  = require ("../models/role")
 const Socio = require("../models/socio")
 const Usuario = require ("../models/usuario")
+const Categoria = require("../models/categoria");
 
   const esRoleValido = async(role="")=>{
     const existeRole= await Role.findOne({role})
@@ -71,7 +72,14 @@ const  cuilempleadorExisteSocio = async(empleadorcuil)=>{
     
   }}
 
- 
+   // validar categoria por id
+   const categoriaExiste =async(_id)=>{
+    
+    const existeCategoria = await Categoria.findById({_id});
+    if (!existeCategoria ) {
+        throw new Error(`El id ${id} no existe en la Base de Datos`);
+    };
+    }
   module.exports = {
     esRoleValido,
     emailExiste,
@@ -81,5 +89,6 @@ const  cuilempleadorExisteSocio = async(empleadorcuil)=>{
     existeSocioporId,
     doctrabajadorExisteSocio,
     cuiltrabajadorExisteSocio,
+    categoriaExiste ,
     cuilempleadorExisteSocio
   }
