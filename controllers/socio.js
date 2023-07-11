@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 
 const Socio = require("../models/socio");
 
+
 const sociosGet = async (req, res) => {
  
   const socios = await Socio.find(); //{estado:true} Lo saque para que traiga todos los socios hasta los inactivos
@@ -16,6 +17,7 @@ const sociosPost = async (req, res) => {
   const {
     email,
     trabajadornombre,
+    trabajadorsueldo,
     trabajadorapellido,
     trabajadornacionalidad,
     trabajadorestadocivil,
@@ -51,6 +53,7 @@ const sociosPost = async (req, res) => {
   const socio = new Socio({
     email,
     trabajadornombre,
+    trabajadorsueldo,
     trabajadorapellido,
     trabajadornacionalidad,
     trabajadorestadocivil,

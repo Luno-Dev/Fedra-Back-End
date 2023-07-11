@@ -42,6 +42,10 @@ const SocioSchema = Schema({
     required: [true, "El cuil del trabajador es obligatorio"],
     unique: true,
   },
+ trabajadorsueldo: {
+    type: Number,
+    required: [true, "El sueldo del trabajador es obligatorio"],
+  }, 
   trabajadordomicilio: {
     type: String,
     required: [true, "El domicilio del trabajador es obligatorio"],
@@ -143,11 +147,21 @@ const SocioSchema = Schema({
   img: {
     type: String,
   },
+  convenio: {
+    type: String,
+    enum: ["SUTCAPRA","SUTEP"],
+    default: "SUTCAPRA",
+  },
   estado: {
     type: Boolean,
     default: true,
   },
+  estadoPago: {
+    type: Boolean,
+    default: false,
+  },
 });
+
 
 SocioSchema.methods.toJSON = function () {
   const { __v, password,  _id, ...socio } = this.toObject();
