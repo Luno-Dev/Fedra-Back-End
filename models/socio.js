@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const SocioSchema = Schema({
   //INICIO DEL TRABAJADOR
-  empleadosw: [{
+  empleados: [{
     trabajadornombre: {
       type: String,
       required: [true, "El nombre del trabajador es obligatorio"],
