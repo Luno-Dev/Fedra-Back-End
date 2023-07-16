@@ -24,6 +24,11 @@ const NoticiaSchema = Schema({
 
   }
   ],
+  categoria:{
+    type:Schema.Types.ObjectId,
+    ref:"Categoria",
+    required:true
+},
   estado: {
     type: Boolean,
     default: true,
