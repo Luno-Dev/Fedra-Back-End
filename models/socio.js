@@ -2,10 +2,10 @@ const { Schema, model } = require("mongoose");
 
 const SocioSchema = Schema({
   //INICIO DEL TRABAJADOR
-  empleados: {
+  empleados: [{
     type:Schema.Types.ObjectId,
     ref:"Empleados",
-  },
+  }],
 
   empleadorcuil: {
     type: String,

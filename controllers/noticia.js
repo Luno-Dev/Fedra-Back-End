@@ -7,7 +7,7 @@ const obtenerNoticias = async (req, res) => {
 
   const [total, noticias] = await Promise.all([
     Noticia.countDocuments(query),
-    Noticia.find(query).skip(Number(desde)).limit(Number(limite)),
+    Noticia.find(query).skip(Number(desde)).limit(Number(limite)).populate("categoria", "nombre"),
   ]);
   res.json({
     total,
@@ -19,7 +19,7 @@ const obtenerNoticias = async (req, res) => {
 const obtenerNoticia = async (req, res) => {
   const { id } = req.params;
 console.log(id);
-  const noticia = await Noticia.findById(id);
+  const noticia = await Noticia.findById(id).populate("categoria", "nombre");
 
   res.json({
     noticia,
@@ -28,7 +28,7 @@ console.log(id);
 // ----------------------------------------------------------------
 // Crear producto nuevo
 const crearNoticia = async (req, res) => {
-  const { descripcion, autor,  fecha,
+  const { descripcion, autor,  fecha, categoria,
     imguno,
     subtitulouno,
     imgdos,
@@ -47,6 +47,7 @@ const crearNoticia = async (req, res) => {
   const data = {
     titulo,
     descripcion,
+    categoria,
     autor,
     fecha,
     imguno,

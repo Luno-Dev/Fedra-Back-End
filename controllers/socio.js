@@ -6,7 +6,7 @@ const Empleados = require('../models/empleados');
 
 const sociosGet = async (req, res) => {
  
-  const socios = await Socio.find().populate("empleados","trabajadornombre") //{estado:true} Lo saque para que traiga todos los socios hasta los inactivos
+  const socios = await Socio.find().populate("empleados", "trabajadornombre") //{estado:true} Lo saque para que traiga todos los socios hasta los inactivos
   const total = await Socio.countDocuments()
 
   res.json({
@@ -15,6 +15,20 @@ const sociosGet = async (req, res) => {
     
   });
 };
+
+
+/* const empleadosGet = async (req, res) => {
+ 
+  const socios = await Empleados.find().populate("empleados","trabajadornombre") //{estado:true} Lo saque para que traiga todos los socios hasta los inactivos
+  const total = await Empleados.countDocuments()
+
+  res.json({
+    total,
+   socios,
+    
+  });
+}; */
+
 const sociosPost = async (req, res) => {
 
   
@@ -114,7 +128,7 @@ const data = {
   trabajadortareas,
   trabajadortel,
   trabajadorcel,
-  empleador: req.headers.empleador
+  socio: req.headers.empleador
 };
 
   const empleados = new Empleados(data );
