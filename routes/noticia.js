@@ -25,7 +25,7 @@ router.post("/",[
     esAdminRole,
     check("titulo", "El titulo es obligatorio").notEmpty(),
     check("descripcion", "La descricion es obligatoria").notEmpty(),
-    check("img", "La imagen es obligatoria").notEmpty(),
+    check("imguno", "La imagen es obligatoria").notEmpty(),
     check("autor", "El autor es obligatorio").notEmpty(),
     check("categoria", "La categoria es obligatoria").notEmpty(),
     validarCampos,

@@ -28,7 +28,7 @@ console.log(id);
 // ----------------------------------------------------------------
 // Crear producto nuevo
 const crearNoticia = async (req, res) => {
-  const { descripcion, autor,  img , categoria} = req.body;
+  const { descripcion, autor,  img , categoria ,imguno ,imgdos , imgtres , subtitulouno , subtitulodos , subtitulotres} = req.body;
   const titulo = req.body.titulo.toUpperCase();
   const noticiaDb = await Noticia.findOne({ titulo });
   if (noticiaDb) {
@@ -43,6 +43,7 @@ const crearNoticia = async (req, res) => {
     autor,
     categoria,
     img,
+    imguno ,imgdos , imgtres , subtitulouno , subtitulodos , subtitulotres
   };
   const noticia = new Noticia(data)
 
@@ -58,11 +59,20 @@ const crearNoticia = async (req, res) => {
 
     const actualizarNoticia = async (req, res) => {
         const {id} = req.params;
-        const { descripcion, autor,  img , categoria } = req.body;
+        const { descripcion, autor,  img , categoria ,imguno ,imgdos , imgtres , subtitulouno , subtitulodos , subtitulotres} = req.body;
 
 
         let data ={
-            descripcion, autor,  img
+            descripcion, 
+            autor,  
+            img ,
+            imguno ,
+            imgdos ,
+             imgtres , 
+             subtitulouno , 
+             subtitulodos , 
+             subtitulotres ,
+             categoria
         }
         if(req.body.titulo){
             data.titulo =  req.body.titulo.toUpperCase();
