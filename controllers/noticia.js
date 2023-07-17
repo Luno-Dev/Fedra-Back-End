@@ -28,7 +28,14 @@ console.log(id);
 // ----------------------------------------------------------------
 // Crear producto nuevo
 const crearNoticia = async (req, res) => {
-  const { descripcion, autor,  img } = req.body;
+  const { descripcion, autor,  fecha,
+    imguno,
+    subtitulouno,
+    imgdos,
+    subtitulodos,
+    imgtres,
+    subtitulotres,   } = req.body;
+    
   const titulo = req.body.titulo.toUpperCase();
   const noticiaDb = await Noticia.findOne({ titulo });
   if (noticiaDb) {
@@ -41,8 +48,13 @@ const crearNoticia = async (req, res) => {
     titulo,
     descripcion,
     autor,
-    
-    img,
+    fecha,
+    imguno,
+    subtitulouno,
+    imgdos,
+    subtitulodos,
+    imgtres,
+    subtitulotres,
   };
   const noticia = new Noticia(data)
 
