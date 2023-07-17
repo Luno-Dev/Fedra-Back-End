@@ -16,8 +16,8 @@ const NoticiaSchema = Schema({
   categoria:{
     type:Schema.Types.ObjectId,
     ref:"Categoria",
-    required:true,
-},
+    required: true
+   },
   fecha: {
     type: Date,
     default: Date.now(),
