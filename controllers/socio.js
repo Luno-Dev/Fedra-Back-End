@@ -68,12 +68,57 @@ const sociosPost = async (req, res) => {
 
 
 const empleadosPost = async (req, res) => {
+const empleado = req.body;
 
-  
+const {
+  email,
+  trabajadornombre,
+  trabajadorsueldo,
+  trabajadorapellido,
+  trabajadornacionalidad,
+  trabajadorestadocivil,
+  trabajadorsexo,
+  trabajadornacimiento,
+  trabajadordocumento,
+  trabajadorcuil,
+  trabajadordomicilio,
+  trabajadornumdomicilio,
+  trabajadorpiso,
+  trabajadordepto,
+  trabajadorlocalidad,
+  trabajadorprovincia,
+  trabajadorlugardetrabajo,
+  trabajadortareas,
+  trabajadortel,
+  trabajadorcel
 
-  const empleados = new Empleados(req.body );
+} = req.body;
+
+const data = {
+  trabajadornombre,
+  trabajadorsueldo,
+  trabajadorapellido,
+  trabajadornacionalidad,
+  trabajadorestadocivil,
+  trabajadorsexo,
+  trabajadornacimiento,
+  trabajadordocumento,
+  trabajadorcuil,
+  trabajadordomicilio,
+  trabajadornumdomicilio,
+  trabajadorpiso,
+  trabajadordepto,
+  trabajadorlocalidad,
+  trabajadorprovincia,
+  trabajadorlugardetrabajo,
+  trabajadortareas,
+  trabajadortel,
+  trabajadorcel,
+  empleador: req.headers.empleador
+};
+
+  const empleados = new Empleados(data );
   
-console.log(req.socio);
   await empleados.save();
  res.status(201).json({
     msg:"Empleado creado con exito!",

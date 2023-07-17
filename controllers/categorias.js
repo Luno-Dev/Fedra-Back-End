@@ -35,7 +35,6 @@ const obtenerCategoria =  async (req = request, res = response)=>{
 //CREAR CATEGORIA NUEVA
 const crearCategoria = async (req = request, res = response) => {
   const nombre = req.body.nombre.toUpperCase();
-
   const categoriaDB = await Categoria.findOne({ nombre });
 
   if (categoriaDB) {
@@ -44,7 +43,7 @@ const crearCategoria = async (req = request, res = response) => {
     });
   }
 
-  console.log(req.usuario);
+  
 
   //generar la data para guardar
   const data = {

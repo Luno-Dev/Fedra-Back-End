@@ -13,17 +13,33 @@ const NoticiaSchema = Schema({
     type: String,
     required: [true, "El autor es obligatorio"],
   },
+  categoria:{
+    type:Schema.Types.ObjectId,
+    ref:"Categoria",
+    required:true,
+},
   fecha: {
     type: Date,
     default: Date.now(),
   },
-  img: [{
-
-    type: String,
-
-
-  }
-  ],
+  imguno: {
+    tyoe: String,
+  },
+  imgdos: {
+    tyoe: String,
+  }, 
+  imgtres: {
+    tyoe: String,
+  }, 
+  subtitulouno: {
+    tyoe: String,
+  }, 
+  subtitulodos: {
+    tyoe: String,
+  }, 
+  subtitulotres: {
+    tyoe: String,
+  }, 
   estado: {
     type: Boolean,
     default: true,

@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const EmpleadosSchema = Schema({
   //INICIO DEL TRABAJADOR
-  socio: {
+  empleador: {
     type:Schema.Types.ObjectId,
     ref:"Socio",
      
