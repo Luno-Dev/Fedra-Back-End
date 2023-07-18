@@ -18,7 +18,6 @@ const obtenerNoticias = async (req, res) => {
 // Trer un producto por su id
 const obtenerNoticia = async (req, res) => {
   const { id } = req.params;
-console.log(id);
   const noticia = await Noticia.findById(id).populate("categoria", "nombre");
 
   res.json({

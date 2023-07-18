@@ -7,7 +7,6 @@ const NoticiaSchema = Schema({
   },
   descripcion: {
     type: String,
-    required: [true, "La descripcion es obligatoria"],
   },
   autor: {
     type: String,
@@ -16,7 +15,6 @@ const NoticiaSchema = Schema({
   categoria:{
     type:Schema.Types.ObjectId,
     ref:"Categoria",
-    required: true
    },
   fecha: {
     type: Date,
