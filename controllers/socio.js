@@ -1,21 +1,41 @@
 const bcrypt = require('bcryptjs');
 
 const Socio = require("../models/socio");
+const Empleados = require('../models/empleados');
+
 
 const sociosGet = async (req, res) => {
  
-  const socios = await Socio.find(); //{estado:true} Lo saque para que traiga todos los socios hasta los inactivos
+  const socios = await Socio.find().populate("empleados", "trabajadornombre") //{estado:true} Lo saque para que traiga todos los socios hasta los inactivos
   const total = await Socio.countDocuments()
+
   res.json({
     total,
    socios,
     
   });
 };
+
+
+/* const empleadosGet = async (req, res) => {
+ 
+  const socios = await Empleados.find().populate("empleados","trabajadornombre") //{estado:true} Lo saque para que traiga todos los socios hasta los inactivos
+  const total = await Empleados.countDocuments()
+
+  res.json({
+    total,
+   socios,
+    
+  });
+}; */
+
 const sociosPost = async (req, res) => {
+
+  
   const {
     email,
     trabajadornombre,
+    trabajadorsueldo,
     trabajadorapellido,
     trabajadornacionalidad,
     trabajadorestadocivil,
@@ -48,40 +68,7 @@ const sociosPost = async (req, res) => {
  
   } = req.body;
 
-  const socio = new Socio({
-    email,
-    trabajadornombre,
-    trabajadorapellido,
-    trabajadornacionalidad,
-    trabajadorestadocivil,
-    trabajadorsexo,
-    trabajadornacimiento,
-    trabajadordocumento,
-    trabajadorcuil,
-    trabajadordomicilio,
-    trabajadornumdomicilio,
-    trabajadorpiso,
-    trabajadordepto,
-    trabajadorlocalidad,
-    trabajadorprovincia,
-    trabajadorlugardetrabajo,
-    trabajadortareas,
-    trabajadortel,
-    trabajadorcel,
-    empleadorcuil,
-    empleadorrazonsocial,
-    empleadordomicilio,
-    empleadorlocalidad,
-    empleadorprovincia,
-    empleadortrabajodomicilio,
-    empleadortrabajolocalidad,
-    empleadortrabajoprovincia,
-    empleadoractividad,
-    password,
-    role,
-    img,
-  
-  });
+  const socio = new Socio(req.body );
 
   const salt = bcrypt.genSaltSync();
   socio.password = bcrypt.hashSync(password, salt);
@@ -92,6 +79,67 @@ const sociosPost = async (req, res) => {
     socio,
   });
 };
+
+
+const empleadosPost = async (req, res) => {
+const empleado = req.body;
+
+const {
+  email,
+  trabajadornombre,
+  trabajadorsueldo,
+  trabajadorapellido,
+  trabajadornacionalidad,
+  trabajadorestadocivil,
+  trabajadorsexo,
+  trabajadornacimiento,
+  trabajadordocumento,
+  trabajadorcuil,
+  trabajadordomicilio,
+  trabajadornumdomicilio,
+  trabajadorpiso,
+  trabajadordepto,
+  trabajadorlocalidad,
+  trabajadorprovincia,
+  trabajadorlugardetrabajo,
+  trabajadortareas,
+  trabajadortel,
+  trabajadorcel
+
+} = req.body;
+
+const data = {
+  trabajadornombre,
+  trabajadorsueldo,
+  trabajadorapellido,
+  trabajadornacionalidad,
+  trabajadorestadocivil,
+  trabajadorsexo,
+  trabajadornacimiento,
+  trabajadordocumento,
+  trabajadorcuil,
+  trabajadordomicilio,
+  trabajadornumdomicilio,
+  trabajadorpiso,
+  trabajadordepto,
+  trabajadorlocalidad,
+  trabajadorprovincia,
+  trabajadorlugardetrabajo,
+  trabajadortareas,
+  trabajadortel,
+  trabajadorcel,
+  socio: req.headers.empleador
+};
+
+  const empleados = new Empleados(data );
+  
+  await empleados.save();
+ res.status(201).json({
+    msg:"Empleado creado con exito!",
+    empleados,
+  });
+};
+
 const sociosPut =async(req, res) => {
   const { id } = req.params;
   const {_id,password, email,...restos} = req.body;
@@ -116,6 +164,16 @@ const sociosDelete = async(req, res) => {
  
 };
 
+const sociosDeleteEmpleado = async(req, res) => {
+  const { id } = req.params;
+  const socioBorrado = await Socio.empleados.findByIdAndDelete(id);
+  res.json({
+    msg: "Empleado dado de baja  correctamente",
+    socioBorrado
+  });
+ 
+};
+
 const obtenerSocio= async (req, res) => {
   const { id } = req.params;
 
@@ -129,7 +187,9 @@ const obtenerSocio= async (req, res) => {
 module.exports = {
   sociosGet,
   sociosPost,
+  empleadosPost,
   sociosPut,
   sociosDelete,
+  sociosDeleteEmpleado,
   obtenerSocio,
 };

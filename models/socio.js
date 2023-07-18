@@ -1,89 +1,12 @@
 const { Schema, model } = require("mongoose");
 
 const SocioSchema = Schema({
- //INICIO DEL TRABAJADOR
+  //INICIO DEL TRABAJADOR
+  empleados: [{
+    type:Schema.Types.ObjectId,
+    ref:"Empleados",
+  }],
 
-  trabajadornombre: {
-    type: String,
-    required: [true, "El nombre del trabajador es obligatorio"],
-    
-  },
-  trabajadorapellido: {
-    type: String,
-    required: [true, "El apellido del trabajador es obligatorio"],
-    
-  },
-  trabajadornacionalidad: {
-    type: String,
-    required: [true, "La nacionalidad  del trabajador es obligatoria"],
-    
-  },
-  trabajadorestadocivil: {
-    type: String,
-    required: [true, "El estado civil del trabajador es obligatorio"],
-    
-  },
-  trabajadorsexo: {
-    type: String,
-    required: [true, "El sexo del trabajador es obligatorio"],
-   
-  },
-  trabajadornacimiento: {
-    type: String,
-    required: [true, "la fecha de nacimiento del trabajador es obligatorio"],
-  },
-  trabajadordocumento: {
-    type: String,
-    required: [true, "El documento del trabajador es obligatorio"],
-    unique: true,
-  },
-  trabajadorcuil: {
-    type: String,
-    required: [true, "El cuil del trabajador es obligatorio"],
-    unique: true,
-  },
-  trabajadordomicilio: {
-    type: String,
-    required: [true, "El domicilio del trabajador es obligatorio"],
-   
-  },
-  trabajadornumdomicilio: {
-    type: String,
-    required: [true, "El Numero de domicilio del trabajador es obligatorio"],
-  },
-  trabajadorpiso: {
-    type: String,
-    
-  },
-
-  trabajadordepto: {
-    type: String,
-    
-  },
-  trabajadorlocalidad: {
-    type: String,
-    required: [true, "La localidad del trabajador es obligatoria"],
-  },
-  trabajadorprovincia: {
-    type: String,
-    required: [true, "La provincia del trabajador es obligatoria"],
-  },
-  trabajadorlugardetrabajo: {
-    type: String,
-    required: [true, "El lugar donde trabaja el trabajador es obligatorio"],
-  },
-  trabajadortareas: {
-    type: String,
-    required: [true, "Las tareaws del trabajador en su trabajo son obligatorias"],
-  },
-  trabajadortel: {
-    type: String,
-    required: [true, "El telefono del trabajador es obligatorio"],
-  },
-  trabajadorcel: {
-    type: String,
-    required: [true, "El cel del trabajador es obligatorio"],
-  },
   empleadorcuil: {
     type: String,
     required: [true, "El cuil del empleador es obligatorio"],
@@ -92,27 +15,27 @@ const SocioSchema = Schema({
   empleadorrazonsocial: {
     type: String,
     required: [true, "La razon social del empleador es obligatoria"],
-    
+
   },
   empleadordomicilio: {
     type: String,
     required: [true, "El domicilio del empleador es obligatorio"],
-   
+
   },
   empleadorlocalidad: {
     type: String,
     required: [true, "La localidad del empleador es obligatoria"],
- 
+
   },
   empleadorprovincia: {
     type: String,
     required: [true, "La provincia del empleador es obligatoria"],
- 
+
   },
   empleadortrabajodomicilio: {
     type: String,
     required: [true, "El domicilio del trabajo del empleador es obligatorio"],
- 
+
   },
   empleadortrabajolocalidad: {
     type: String,
@@ -126,7 +49,7 @@ const SocioSchema = Schema({
     type: String,
     required: [true, "La actividad del trabajo del empleador es obligatoria"],
   },
-  
+
   email: {
     type: String,
     required: [true, "El email es obligatorio"],
@@ -137,20 +60,30 @@ const SocioSchema = Schema({
     required: [true, "El password es obligatorio"],
   },
   role: {
-    type: String, 
-    default: "SOCIO_ROLE",
+    type: String,
+    default: "ADMIN_ROLE",
   },
   img: {
     type: String,
+  },
+  convenio: {
+    type: String,
+    enum: ["SUTCAPRA", "SUTEP"],
+    default: "SUTCAPRA",
   },
   estado: {
     type: Boolean,
     default: true,
   },
+  estadoPago: {
+    type: Boolean,
+    default: false,
+  },
 });
 
+
 SocioSchema.methods.toJSON = function () {
-  const { __v, password,  _id, ...socio } = this.toObject();
+  const { __v, password, _id, ...socio } = this.toObject();
   socio.socioid = _id;
   return socio;
 };

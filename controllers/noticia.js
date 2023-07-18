@@ -7,7 +7,7 @@ const obtenerNoticias = async (req, res) => {
 
   const [total, noticias] = await Promise.all([
     Noticia.countDocuments(query),
-    Noticia.find(query).skip(Number(desde)).limit(Number(limite)),
+    Noticia.find(query).skip(Number(desde)).limit(Number(limite)).populate("categoria", "nombre"),
   ]);
   res.json({
     total,
@@ -19,7 +19,7 @@ const obtenerNoticias = async (req, res) => {
 const obtenerNoticia = async (req, res) => {
   const { id } = req.params;
 console.log(id);
-  const noticia = await Noticia.findById(id);
+  const noticia = await Noticia.findById(id).populate("categoria", "nombre");
 
   res.json({
     noticia,
@@ -28,7 +28,14 @@ console.log(id);
 // ----------------------------------------------------------------
 // Crear producto nuevo
 const crearNoticia = async (req, res) => {
-  const { descripcion, autor,  img } = req.body;
+  const { descripcion, autor,  fecha, categoria,
+    imguno,
+    subtitulouno,
+    imgdos,
+    subtitulodos,
+    imgtres,
+    subtitulotres,   } = req.body;
+    
   const titulo = req.body.titulo.toUpperCase();
   const noticiaDb = await Noticia.findOne({ titulo });
   if (noticiaDb) {
@@ -40,9 +47,15 @@ const crearNoticia = async (req, res) => {
   const data = {
     titulo,
     descripcion,
+    categoria,
     autor,
-    
-    img,
+    fecha,
+    imguno,
+    subtitulouno,
+    imgdos,
+    subtitulodos,
+    imgtres,
+    subtitulotres,
   };
   const noticia = new Noticia(data)
 
