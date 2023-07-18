@@ -23,22 +23,22 @@ const NoticiaSchema = Schema({
     default: Date.now(),
   },
   imguno: {
-    tyoe: String,
+    type: String,
   },
   imgdos: {
-    tyoe: String,
+    type: String,
   }, 
   imgtres: {
-    tyoe: String,
+    type: String,
   }, 
   subtitulouno: {
-    tyoe: String,
+    type: String,
   }, 
   subtitulodos: {
-    tyoe: String,
+    type: String,
   }, 
   subtitulotres: {
-    tyoe: String,
+    type: String,
   }, 
   estado: {
     type: Boolean,
