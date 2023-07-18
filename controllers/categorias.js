@@ -1,19 +1,21 @@
 const { request, response } = require("express");
 const Categoria = require("../models/categoria");
+
 //OBTENER TODAS LAS CATEGORIAS
 const obtenerCategorias = async (req = request, res = response) => {
   const { limite = 0, desde = 0 } = req.query;
-
+ 
   const consulta = { estado: true };
 
   const categorias = await Categoria.find(consulta)
   .skip(desde)
-  .limit(limite).populate("usuario","nombre email")
+  .limit(limite).populate("usuario","nombre email").populate("noticias")
 
   const total = await Categoria.countDocuments(consulta)
 
   res.status(200).json({
     total,
+    
     categorias 
   })
 
@@ -22,7 +24,7 @@ const obtenerCategorias = async (req = request, res = response) => {
 //OBTENER UNA CATEGORIA
 const obtenerCategoria =  async (req = request, res = response)=>{
         const {id} = req.params 
-
+       
         const categoria = await Categoria.findById(id).populate("usuario","nombre email")
 
         res.status(200).json({
@@ -35,7 +37,7 @@ const obtenerCategoria =  async (req = request, res = response)=>{
 //CREAR CATEGORIA NUEVA
 const crearCategoria = async (req = request, res = response) => {
   const nombre = req.body.nombre.toUpperCase();
-
+  const { noticias} = req.body;
   const categoriaDB = await Categoria.findOne({ nombre });
 
   if (categoriaDB) {
@@ -48,6 +50,7 @@ const crearCategoria = async (req = request, res = response) => {
   const data = {
     nombre,
     usuario: req.usuario._id,
+    noticias
   };
   const categoria = new Categoria(data);
 
@@ -65,7 +68,8 @@ const actualizarCategoria =  async (req = request, res = response)=>{
     const usuario = req.usuario._id
     const datos ={
         nombre,
-        usuario
+        usuario,
+        noticia
     }
     const categoria = await Categoria.findByIdAndUpdate(id,datos,{new:true})
 
