@@ -18,7 +18,7 @@ const obtenerNoticias = async (req, res) => {
 // Trer un producto por su id
 const obtenerNoticia = async (req, res) => {
   const { id } = req.params;
-console.log(id);
+
   const noticia = await Noticia.findById(id).populate("categoria", "nombre");
 
   res.json({
@@ -28,14 +28,19 @@ console.log(id);
 // ----------------------------------------------------------------
 // Crear producto nuevo
 const crearNoticia = async (req, res) => {
-  const { descripcion, autor,  fecha, categoria,
+  const { descripcion, autor, fecha, categoria,
     imguno,
     subtitulouno,
     imgdos,
     subtitulodos,
     imgtres,
-    subtitulotres,   } = req.body;
-    
+    subtitulotres,
+    imgcuatro,
+    subtitulocuatro,
+    imgcinco,
+    subtitulocinco,
+  } = req.body;
+
   const titulo = req.body.titulo.toUpperCase();
   const noticiaDb = await Noticia.findOne({ titulo });
   if (noticiaDb) {
@@ -56,12 +61,16 @@ const crearNoticia = async (req, res) => {
     subtitulodos,
     imgtres,
     subtitulotres,
+    imgcuatro,
+    subtitulocuatro,
+    imgcinco,
+    subtitulocinco,
   };
   const noticia = new Noticia(data)
 
   await noticia.save();
   res.status(201).json({
-    msg:"Se creo una nueva noticia",
+    msg: "Se creo una nueva noticia",
     noticia
   })
 
@@ -69,33 +78,33 @@ const crearNoticia = async (req, res) => {
 //----------------------------------------------------------------
 //actualizar producto
 
-    const actualizarNoticia = async (req, res) => {
-        const {id} = req.params;
-        const { descripcion, autor,  img } = req.body;
+const actualizarNoticia = async (req, res) => {
+  const { id } = req.params;
+  const { descripcion, autor, img } = req.body;
 
 
-        let data ={
-            descripcion, autor,  img
-        }
-        if(req.body.titulo){
-            data.titulo =  req.body.titulo.toUpperCase();
-        }
+  let data = {
+    descripcion, autor, img
+  }
+  if (req.body.titulo) {
+    data.titulo = req.body.titulo.toUpperCase();
+  }
 
-        const noticia = await Noticia.findByIdAndUpdate(id,data,{new:true})
-        res.status(200).json({
-            msg:"Noticia actualizada correctamente",
-            noticia
-        })
-        
-    }
-    const borrarNoticia = async (req,res)=>{
-        const {id} = req.params;
-        const noticiaBorrada = await Noticia.findByIdAndDelete(id);
-        res.json({
-            msg:"Noticia borrada correctamente",
-            noticiaBorrada
-        })
-    }
+  const noticia = await Noticia.findByIdAndUpdate(id, data, { new: true })
+  res.status(200).json({
+    msg: "Noticia actualizada correctamente",
+    noticia
+  })
+
+}
+const borrarNoticia = async (req, res) => {
+  const { id } = req.params;
+  const noticiaBorrada = await Noticia.findByIdAndDelete(id);
+  res.json({
+    msg: "Noticia borrada correctamente",
+    noticiaBorrada
+  })
+}
 module.exports = {
   obtenerNoticias,
   obtenerNoticia,

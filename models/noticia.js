@@ -7,17 +7,17 @@ const NoticiaSchema = Schema({
   },
   descripcion: {
     type: String,
-    required: [true, "La descripcion es obligatoria"],
   },
   autor: {
     type: String,
     required: [true, "El autor es obligatorio"],
   },
-  categoria:{
-    type:Schema.Types.ObjectId,
-    ref:"Categoria",
+  categoria: {
+    type: Schema.Types.ObjectId,
+    ref: "Categoria",
     required: true
-   },
+  },
+
   fecha: {
     type: Date,
     default: Date.now(),
@@ -27,19 +27,31 @@ const NoticiaSchema = Schema({
   },
   imgdos: {
     type: String,
-  }, 
+  },
   imgtres: {
     type: String,
-  }, 
+  },
+  imgcuatro: {
+    type: String,
+  },
+  imgcinco: {
+    type: String,
+  },
   subtitulouno: {
     type: String,
-  }, 
+  },
   subtitulodos: {
     type: String,
-  }, 
+  },
   subtitulotres: {
     type: String,
-  }, 
+  },
+  subtitulocuatro: {
+    type: String,
+  },
+  subtitulocinco: {
+    type: String,
+  },
   estado: {
     type: Boolean,
     default: true,
