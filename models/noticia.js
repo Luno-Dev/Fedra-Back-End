@@ -7,7 +7,6 @@ const NoticiaSchema = Schema({
   },
   descripcion: {
     type: String,
-    required: [true, "La descripcion es obligatoria"],
   },
   autor: {
     type: String,
@@ -18,6 +17,7 @@ const NoticiaSchema = Schema({
     ref: "Categoria",
     required: true
   },
+
   fecha: {
     type: Date,
     default: Date.now(),
