@@ -168,7 +168,22 @@ const sociosPut = async (req, res) => {
     socio,
   });
 };
+// ///////////////EMPLEADOS PUT 
+const EmpleadosPut = async (req, res) => {
+  const { id } = req.params;
+  const { _id, password, email, ...restos } = req.body;
+  if (password) {
+    const salt = bcrypt.genSaltSync();
+    restos.password = bcrypt.hashSync(password, salt);
+  }
 
+  const empleado = await Empleados.findByIdAndUpdate(id, restos, { new: true })
+  res.status(201).json({
+    msg: "Empleado Actualizado",
+    empleado,
+  });
+};
+// ///////////////FIN EMPLEADOS PUT 
 const sociosDelete = async (req, res) => {
   const { id } = req.params;
   const socioBorrado = await Socio.findByIdAndUpdate(id, { estado: false }, { new: true })
@@ -193,13 +208,14 @@ const sociosDeleteEmpleado = async (req, res) => {
 
 module.exports = {
   sociosGet,
-  empleadosGet,
   socioEmpleado,
   sociosPost,
-  empleadosPost,
   sociosPut,
   sociosDelete,
   sociosDeleteEmpleado,
   obtenerSocio,
   obtenerEmpleado,
+  empleadosGet,
+  empleadosPost,
+  EmpleadosPut,
 };
