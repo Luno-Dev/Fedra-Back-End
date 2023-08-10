@@ -16,6 +16,28 @@ const sociosGet = async (req, res) => {
   });
 };
 
+const obtenerEmpleado = async (req, res) => {
+  const { id } = req.params;
+
+  const empleado = await Empleados.findById(id);
+
+  res.json({
+    empleado,
+  });
+};
+
+const empleadosGet = async (req, res) => {
+
+  const empleados = await Empleados.find();//{estado:true} Lo saque para que traiga todos los socios hasta los inactivos
+  const total = await Empleados.countDocuments()
+
+  res.json({
+    total,
+    empleados,
+
+  });
+};
+
 const obtenerSocio = async (req, res) => {
   const { id } = req.params;
 
@@ -27,10 +49,10 @@ const obtenerSocio = async (req, res) => {
 };
 
 const socioEmpleado = async (req, res) => {
- 
-  const empleados = await Empleados.find({socio:"64b235b6d9c7a401705d7cb6"});//{estado:true} Lo saque para que traiga todos los socios hasta los inactivos
-
   const { id } = req.params;
+  const empleados = await Empleados.find({socio: id});//{estado:true} Lo saque para que traiga todos los socios hasta los inactivos
+
+ 
 
   const empleador = await Socio.findById(id);
 
@@ -46,25 +68,6 @@ const sociosPost = async (req, res) => {
 
   const {
     email,
-    trabajadornombre,
-    trabajadorsueldo,
-    trabajadorapellido,
-    trabajadornacionalidad,
-    trabajadorestadocivil,
-    trabajadorsexo,
-    trabajadornacimiento,
-    trabajadordocumento,
-    trabajadorcuil,
-    trabajadordomicilio,
-    trabajadornumdomicilio,
-    trabajadorpiso,
-    trabajadordepto,
-    trabajadorlocalidad,
-    trabajadorprovincia,
-    trabajadorlugardetrabajo,
-    trabajadortareas,
-    trabajadortel,
-    trabajadorcel,
     empleadorcuil,
     empleadorrazonsocial,
     empleadordomicilio,
@@ -81,7 +84,6 @@ const sociosPost = async (req, res) => {
   } = req.body;
 
   const socio = new Socio(req.body);
-
   const salt = bcrypt.genSaltSync();
   socio.password = bcrypt.hashSync(password, salt);
 
@@ -89,7 +91,8 @@ const sociosPost = async (req, res) => {
   res.status(201).json({
     msg: "Socio creado con exito!",
     socio,
-  });
+  })
+
 };
 
 
@@ -97,7 +100,6 @@ const empleadosPost = async (req, res) => {
   const empleado = req.body;
 
   const {
-    email,
     trabajadornombre,
     trabajadorsueldo,
     trabajadorapellido,
@@ -105,7 +107,6 @@ const empleadosPost = async (req, res) => {
     trabajadorestadocivil,
     trabajadorsexo,
     trabajadornacimiento,
-    trabajadordocumento,
     trabajadorcuil,
     trabajadordomicilio,
     trabajadornumdomicilio,
@@ -128,7 +129,6 @@ const empleadosPost = async (req, res) => {
     trabajadorestadocivil,
     trabajadorsexo,
     trabajadornacimiento,
-    trabajadordocumento,
     trabajadorcuil,
     trabajadordomicilio,
     trabajadornumdomicilio,
@@ -166,6 +166,7 @@ const sociosPut = async (req, res) => {
     socio,
   });
 };
+
 const sociosDelete = async (req, res) => {
   const { id } = req.params;
   const socioBorrado = await Socio.findByIdAndUpdate(id, { estado: false }, { new: true })
@@ -190,6 +191,7 @@ const sociosDeleteEmpleado = async (req, res) => {
 
 module.exports = {
   sociosGet,
+  empleadosGet,
   socioEmpleado,
   sociosPost,
   empleadosPost,
@@ -197,4 +199,5 @@ module.exports = {
   sociosDelete,
   sociosDeleteEmpleado,
   obtenerSocio,
+  obtenerEmpleado,
 };

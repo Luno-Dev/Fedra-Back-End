@@ -27,7 +27,6 @@ router.post("/", [
     }),
     check("email", "El correo no es valido").isEmail(),
     check("email").custom(emailExisteSocio),
-    check("trabajadordocumento").custom(doctrabajadorExisteSocio),
     check("trabajadorcuil").custom(cuiltrabajadorExisteSocio),
     check("empleadorcuil").custom(cuilempleadorExisteSocio),
     check("role").custom(esRoleValido),

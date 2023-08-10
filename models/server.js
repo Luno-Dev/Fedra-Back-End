@@ -13,7 +13,6 @@ class Server {
     this.noticiasPath = "/api/noticias"
     this.sociosPath = "/api/socios"
     this.conectarDb();
-
     this.middleware()
     this.routes()
     
