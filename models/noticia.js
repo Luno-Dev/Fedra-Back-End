@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 const NoticiaSchema = Schema({
   titulo: {
     type: String,
-    required: [true, "El nombre es obligatorio"],
+    required: [true, "El titulo es obligatorio"],
   },
   descripcion: {
     type: String,
@@ -39,6 +39,7 @@ const NoticiaSchema = Schema({
   },
   subtitulouno: {
     type: String,
+
   },
   subtitulodos: {
     type: String,
@@ -52,6 +53,20 @@ const NoticiaSchema = Schema({
   subtitulocinco: {
     type: String,
   },
+  imgtres: {
+    type: String,
+    
+  },
+  subtitulotres: {
+    type: String,
+   
+  },
+  categoria:{
+    type:Schema.Types.ObjectId,
+    ref:"Categoria",
+    required:true,
+},
+
   estado: {
     type: Boolean,
     default: true,

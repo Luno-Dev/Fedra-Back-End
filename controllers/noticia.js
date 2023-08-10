@@ -8,6 +8,7 @@ const obtenerNoticias = async (req, res) => {
   const [total, noticias] = await Promise.all([
     Noticia.countDocuments(query),
     Noticia.find(query).skip(Number(desde)).limit(Number(limite)).populate("categoria", "nombre"),
+
   ]);
   res.json({
     total,
@@ -40,6 +41,7 @@ const crearNoticia = async (req, res) => {
     imgcinco,
     subtitulocinco,
   } = req.body;
+
 
   const titulo = req.body.titulo.toUpperCase();
   const noticiaDb = await Noticia.findOne({ titulo });
@@ -89,6 +91,7 @@ const actualizarNoticia = async (req, res) => {
   if (req.body.titulo) {
     data.titulo = req.body.titulo.toUpperCase();
   }
+
 
   const noticia = await Noticia.findByIdAndUpdate(id, data, { new: true })
   res.status(200).json({

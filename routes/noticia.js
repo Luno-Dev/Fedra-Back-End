@@ -25,6 +25,7 @@ router.post("/",[
     esAdminRole,
     check("titulo", "El titulo es obligatorio").notEmpty(),
     check("autor", "El autor es obligatorio").notEmpty(),
+    check("categoria", "La categoria es obligatoria").notEmpty(),
     validarCampos,
 
 ],crearNoticia)
