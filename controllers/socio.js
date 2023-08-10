@@ -100,6 +100,7 @@ const empleadosPost = async (req, res) => {
   const empleado = req.body;
 
   const {
+    trabajadordocumento,
     trabajadornombre,
     trabajadorsueldo,
     trabajadorapellido,
@@ -122,6 +123,7 @@ const empleadosPost = async (req, res) => {
   } = req.body;
 
   const data = {
+    trabajadordocumento,
     trabajadornombre,
     trabajadorsueldo,
     trabajadorapellido,

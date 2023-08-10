@@ -27,7 +27,6 @@ router.post("/", [
     }),
     check("email", "El correo no es valido").isEmail(),
     check("email").custom(emailExisteSocio),
-    check("trabajadorcuil").custom(cuiltrabajadorExisteSocio),
     check("empleadorcuil").custom(cuilempleadorExisteSocio),
     check("role").custom(esRoleValido),
     validarCampos
@@ -35,7 +34,6 @@ router.post("/", [
 
 router.post("/empleado", [
 
-  check("trabajadordocumento").custom(doctrabajadorExisteSocio),
   check("trabajadorcuil").custom(cuiltrabajadorExisteSocio),
   validarCampos
 ], empleadosPost )
