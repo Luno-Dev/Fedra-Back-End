@@ -71,11 +71,23 @@ const crearNoticia = async (req, res) => {
 
     const actualizarNoticia = async (req, res) => {
         const {id} = req.params;
-        const { descripcion, autor,  img } = req.body;
+        const {descripcion, autor,  fecha, categoria,
+          imguno,
+          subtitulouno,
+          imgdos,
+          subtitulodos,
+          imgtres,
+          subtitulotres, } = req.body;
 
 
         let data ={
-            descripcion, autor,  img
+          descripcion, autor,  fecha, categoria,
+          imguno,
+          subtitulouno,
+          imgdos,
+          subtitulodos,
+          imgtres,
+          subtitulotres,
         }
         if(req.body.titulo){
             data.titulo =  req.body.titulo.toUpperCase();
