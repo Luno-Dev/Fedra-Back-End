@@ -24,7 +24,9 @@ class Server {
 
 
   middleware(){
-    this.app.use(cors())
+    this.app.use(cors(
+      config.application.cors.server
+    ))
     this.app.use(express.json())
     this.app.use(express.static("public"))
    

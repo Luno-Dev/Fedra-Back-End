@@ -92,7 +92,6 @@ const actualizarNoticia = async (req, res) => {
     data.titulo = req.body.titulo.toUpperCase();
   }
 
-
   const noticia = await Noticia.findByIdAndUpdate(id, data, { new: true })
   res.status(200).json({
     msg: "Noticia actualizada correctamente",

@@ -67,6 +67,7 @@ const NoticiaSchema = Schema({
     required:true,
 },
 
+
   estado: {
     type: Boolean,
     default: true,
