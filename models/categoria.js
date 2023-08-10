@@ -11,6 +11,11 @@ const CategoriaSchema  = Schema({
         default:true,
         required:true
      },
+     noticias:[{
+      type:Schema.Types.ObjectId,
+      ref:"Noticia",
+      required:true,
+  }],
      usuario:{
         type:Schema.Types.ObjectId,
         ref:"Usuario",

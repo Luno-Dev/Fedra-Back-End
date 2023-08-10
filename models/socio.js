@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const SocioSchema = Schema({
   //INICIO DEL TRABAJADOR
-  empleados: [{
+   empleados: [{
     type:Schema.Types.ObjectId,
     ref:"Empleados",
   }],
@@ -54,7 +54,7 @@ const SocioSchema = Schema({
     type: String,
     required: [true, "El email es obligatorio"],
     unique: true,
-  },
+  }, 
   password: {
     type: String,
     required: [true, "El password es obligatorio"],
@@ -63,7 +63,7 @@ const SocioSchema = Schema({
     type: String,
     default: "ADMIN_ROLE",
   },
-  img: {
+   img: {
     type: String,
   },
   convenio: {
@@ -76,9 +76,10 @@ const SocioSchema = Schema({
     default: true,
   },
   estadoPago: {
-    type: Boolean,
-    default: false,
-  },
+    type: String,
+    enum: ["DEBE", "PAGO", "INFORMADO"],
+    default: "DEBE",
+  }, 
 });
 
 

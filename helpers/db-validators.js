@@ -1,6 +1,7 @@
 const Noticia = require("../models/noticia")
 const  Role  = require ("../models/role")
 const Socio = require("../models/socio")
+const Empleado = require("../models/empleados")
 const Usuario = require ("../models/usuario")
 const Categoria = require("../models/categoria");
 
@@ -49,16 +50,16 @@ const emailExisteSocio = async(email)=>{
     }
 }
 //documentodetrabajador existe
-const  doctrabajadorExisteSocio = async(trabajadordocumento)=>{
-  const existeEmailSocio = await Socio.findOne({trabajadordocumento})
+/* const  doctrabajadorExisteSocio = async(trabajadordocumento)=>{
+  const existeEmailSocio = await Empleado.findOne({trabajadordocumento})
   if(existeEmailSocio){
     throw new Error(`El documento de trabajador ${trabajadordocumento} ya existe en la BD`)
     
-  }}
+  }} */
 
   //cuildetrabajador existe
 const  cuiltrabajadorExisteSocio = async(trabajadorcuil)=>{
-  const existeEmailSocio = await Socio.findOne({trabajadorcuil})
+  const existeEmailSocio = await Empleado.findOne({trabajadorcuil})
   if(existeEmailSocio){
     throw new Error(`El cuil de trabajador ${trabajadorcuil} ya existe en la BD`)
     
@@ -87,8 +88,8 @@ const  cuilempleadorExisteSocio = async(empleadorcuil)=>{
     noticiaExiste,
     emailExisteSocio,
     existeSocioporId,
-    doctrabajadorExisteSocio,
-    cuiltrabajadorExisteSocio,
+/*     doctrabajadorExisteSocio,
+ */    cuiltrabajadorExisteSocio,
     categoriaExiste ,
     cuilempleadorExisteSocio
   }
