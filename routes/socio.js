@@ -9,7 +9,7 @@ const {
     cuiltrabajadorExisteSocio,
     cuilempleadorExisteSocio
   } = require("../helpers/db-validators");
-const { sociosGet, sociosPost, sociosPut, sociosDelete, obtenerSocio, sociosDeleteEmpleado, empleadosPost, socioEmpleado, EmpleadosPut } = require("../controllers/socio");
+const { sociosGet, sociosPost, sociosPut, sociosDelete, obtenerSocio, sociosDeleteEmpleado, empleadosPost, socioEmpleado, EmpleadosPut, obtenerEmpleado } = require("../controllers/socio");
 
 const { esSocioRole, esAdminRole } = require("../middlewares/validar-role");
 const validarJWT = require("../middlewares/validar-jwt");
@@ -17,7 +17,6 @@ const validarJWT = require("../middlewares/validar-jwt");
 const router = Router()
 
 router.get("/", [
-  validarJWT,
   validarCampos
 ],sociosGet )
 
@@ -65,11 +64,14 @@ router.post("/empleado", [
 ], empleadosPost )
 
 router.put("/empleado/:id",[
-  check("id", "No es un id de mongo valido").isMongoId(),
-  check("trabajadorcuil").custom(cuiltrabajadorExisteSocio),
-  
+  check("id", "No es un id de mongo valido").isMongoId(),  
   validarCampos,
 ],  EmpleadosPut )
+
+router.get("/empleado/detalle/:id",[
+  check("id", "No es un id de mongo valido").isMongoId(),  
+  validarCampos,
+],  obtenerEmpleado )
 
 router.delete("/empleado/:id", [
   check("id", "No es un id de mongo valido").isMongoId(),

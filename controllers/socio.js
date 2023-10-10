@@ -20,7 +20,6 @@ const obtenerEmpleado = async (req, res) => {
   const { id } = req.params;
 
   const empleado = await Empleados.findById(id);
-
   res.json({
     empleado,
   });
@@ -42,9 +41,11 @@ const obtenerSocio = async (req, res) => {
   const { id } = req.params;
 
   const socio = await Socio.findById(id);
+  const empleados = await Empleados.find({socio:id});
 
   res.json({
     socio,
+    empleados
   });
 };
 
@@ -170,12 +171,9 @@ const sociosPut = async (req, res) => {
 };
 // ///////////////EMPLEADOS PUT 
 const EmpleadosPut = async (req, res) => {
+
   const { id } = req.params;
-  const { _id, password, email, ...restos } = req.body;
-  if (password) {
-    const salt = bcrypt.genSaltSync();
-    restos.password = bcrypt.hashSync(password, salt);
-  }
+  const { eId, email, ...restos } = req.body;
 
   const empleado = await Empleados.findByIdAndUpdate(id, restos, { new: true })
   res.status(201).json({

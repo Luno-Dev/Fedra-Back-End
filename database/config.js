@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const dbConnection = async ()  => {
+ const dbConnection = async ()  => {
     try {
          await mongoose.connect(process.env.MONGODB_CNN);
     console.log("Base de datos Fedra online") 
@@ -10,19 +10,9 @@ const dbConnection = async ()  => {
     }
   
 }
-const config = {
-    application: {
-        cors: {
-            server: [
-                {
-                    origin: "localhost:4000", //servidor que deseas que consuma o (*) en caso que sea acceso libre
-                    credentials: true
-                }
-            ]
-        }
-}}
+
 
 module.exports = {
     dbConnection,
-    config
+    
 };
